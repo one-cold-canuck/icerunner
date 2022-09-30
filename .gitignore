@@ -1,0 +1,6 @@
+icerunner.code-workspace
+.vscode/settings.json
+bin
+*.o
+
+.Makefile.swp
