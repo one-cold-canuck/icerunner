@@ -1,13 +1,13 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-class Character
+class Entity
 {
 	int _row, _col;
 	char _symbol;
 
 public:
 	// Create a character
-	Character(char symbol, int row_0, int col_0);
+	Entity(char symbol, int row_0, int col_0);
 
 	// Set the character's position
 	void pos(int row_0, int col_0);

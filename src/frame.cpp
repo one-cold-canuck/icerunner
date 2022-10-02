@@ -1,4 +1,5 @@
 #include "frame.h"
+#include "entity.h"
 
 // #include <ncurses.h>
 Frame::Frame(int nr_rows, int nr_cols, int row_0, int col_0)
@@ -69,13 +70,13 @@ int Frame::col()
 
 
 // Add a character to the window
-void Frame::add(Character &x)
+void Frame::add(Entity &x)
 {
 	mvwaddch(_w, x.row(), x.col(), x.symbol());
 }
 
 // Add a character to the window at a specific position
-void Frame::add(Character &x, int row_0, int col_0) {
+void Frame::add(Entity &x, int row_0, int col_0) {
 	if ((row_0 >= 0 && row_0 < _height) && (col_0 >= 0 && col_0 < _width)) {
 		erase(x);
 		mvwaddch(_w, row_0, col_0, x.symbol());
@@ -85,13 +86,13 @@ void Frame::add(Character &x, int row_0, int col_0) {
 
 // Define the "erase" character, use an empty character for cleaning a cell or
 // a visible character for showing the trace of a game character
-void Frame::erase(Character &x)
+void Frame::erase(Entity &x)
 {
 	mvwaddch(_w, x.row(), x.col(), ' ');
 }
 
 // Center the viewport around a character
-void Frame::center(Character &x)
+void Frame::center(Entity &x)
 {
 	if (_has_super) {
 		int rr = _row, cc = _col, hh, ww;

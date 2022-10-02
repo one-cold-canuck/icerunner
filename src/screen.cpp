@@ -1,7 +1,10 @@
 #include "screen.h"
+#include <string>
 
 Screen::Screen() {
-	initscr();
+	stdscr = initscr();
+	start_color();
+	
 	clear();
 	noecho();
 	cbreak();
@@ -27,4 +30,12 @@ int Screen::width() {
 	return _width;
 }
 
+void Screen::test_color(){
+	printw("Colours supported: %d\n", COLORS);
 
+	for (int i = 1; i < COLORS; ++i){
+		// init_pair(i-1, i, -1);
+		attron(COLOR_PAIR(i));
+		printw("COLOR PAIR: %d\t", COLOR_PAIR(i));
+	}
+}

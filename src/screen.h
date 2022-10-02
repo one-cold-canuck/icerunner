@@ -8,13 +8,21 @@ class Screen {
 public:
 	// Initialize the ncurses library
 	Screen();
+
 	// Clear ncurses
 	~Screen();
+
 	// Print a message on the screen
 	void add(const char* message);
-	// Get the screen height and width
+
+	// Get the screen height
 	int height();
+
+	// Get the screen width
 	int width();
+
+	// Test the terminal's color output
+	void test_color();
 };
 
 #endif

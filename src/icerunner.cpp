@@ -2,10 +2,10 @@
 //
 
 #include "screen.h"
-#include "character.h"
+#include "entity.h"
 #include "frame.h"
 
-void game_loop(Frame &game_map, Frame &viewport, Character &main_char, int ch) {
+void game_loop(Frame &game_map, Frame &viewport, Entity &main_char, int ch) {
 
     if (ch == 'q' || ch == 'Q') return;
 
@@ -51,15 +51,15 @@ int main()
 
     
     Screen screen;
-    screen.add("Welcome to ICERunner.\nPress any key to start.\nIf you want to quit press \"q\" or \"Q\"");
-
+    //screen.add("Welcome to ICERunner.\nPress any key to start.\nIf you want to quit press \"q\" or \"Q\"");
+    screen.test_color();
     // Wait until a key is pressed
     int ch = getch();
 
     Frame game_map(2*screen.height(), 2*screen.width(), 0, 0);
     Frame viewport(game_map, screen.height(), screen.width(), 0, 0);
 
-    Character main_char('@', game_map.height()/2, game_map.width()/2);
+    Entity main_char('@', game_map.height()/2, game_map.width()/2);
 
     game_map.fill_window();
 
