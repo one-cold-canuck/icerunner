@@ -51,8 +51,8 @@ int main()
 
     
     Screen screen;
-    //screen.add("Welcome to ICERunner.\nPress any key to start.\nIf you want to quit press \"q\" or \"Q\"");
-    screen.test_color();
+    screen.add("Welcome to ICERunner.\nPress any key to start.\nIf you want to quit press \"q\" or \"Q\"");
+    
     // Wait until a key is pressed
     int ch = getch();
 
