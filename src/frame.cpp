@@ -1,7 +1,11 @@
-#include "frame.h"
-#include "entity.h"
+#include "frame.hpp"
+#include "entity.hpp"
 
 // #include <ncurses.h>
+Frame::Frame(){
+
+}
+
 Frame::Frame(int nr_rows, int nr_cols, int row_0, int col_0)
 {
 	_has_super = FALSE;
@@ -72,6 +76,7 @@ int Frame::col()
 // Add a character to the window
 void Frame::add(Entity &x)
 {
+	wattron(win(), COLOR_PAIR(x.color()));
 	mvwaddch(_w, x.row(), x.col(), x.symbol());
 }
 
@@ -129,6 +134,9 @@ void Frame::center(Entity &x)
 	}
 }
 
+void Frame::redraw() {
+	redrawwin(_w);
+}
 // Refresh the window
 void Frame::refresh() {
 	if (_has_super) {
@@ -142,10 +150,28 @@ void Frame::move(int r, int c) {
 		mvderwin(_w, r, c);
 		_row = r;
 		_col = c;
+		touchwin(_super);
 		refresh();
 	}
 }
 
+void Frame::frame_window() {
+
+	for (int x = _col; x < _width; x++) {
+		if (x == _col) {
+			mvwaddch(_w, _row, _col, '*');
+			for(int y = _col + 1; y < _width; y++){
+				mvwaddch(_w, _row, y, '-' );
+			}
+			mvwaddch(_w, _row, _width, '*');
+		} else {
+			for(int z = _row + 1; z < _height; z++){
+				mvwaddch(_w, z, _col, '|');
+				mvwaddch(_w, z, _width, '|');	
+			}
+		}
+	}
+}
 // Fill a window with numbers - the window is split in four equal regions, 
 // each region is filled with a single number, so 4 regions and 4 numbers.
 //
@@ -186,12 +212,21 @@ void Frame::fill_window() {
 	}
 
 	for (int y = 0; y < _height; ++y) {
-		mvwaddch(_w, y, 0, '-');
-		mvwaddch(_w, y, _width - 1, '-');
+		mvwaddch(_w, y, 0, '|');
+		mvwaddch(_w, y, _width - 1, '|');
 	}
 
-	for (int x = 0; x < _height; ++x) {
-		mvwaddch(_w, 0, x, '|');
+	for (int x = 0; x < _width; ++x) {
+		mvwaddch(_w, 0, x, '-');
 		mvwaddch(_w, _height - 1, x, '-');
 	}
+}
+
+void Frame::clear_window(){
+	werase(_w);
+
+}
+
+void Frame::append_message(const char* message){
+	mvaddstr(_row + 1, _col + 1, message);
 }

@@ -1,15 +1,18 @@
-#include "screen.h"
+#include "screen.hpp"
+#include "frame.hpp"
 #include <string>
 
 Screen::Screen() {
-	stdscr = initscr();
-	start_color();
-	
+	_stdscr = initscr();
+
 	clear();
 	noecho();
 	cbreak();
-	keypad(stdscr, TRUE);
+	nonl();
+	intrflush(_stdscr, FALSE);
+	keypad(_stdscr, TRUE);
 	curs_set(0);
+	initColor();
 	// Acquire the screen dimensions
 	getmaxyx(stdscr, _height, _width);
 }
@@ -30,12 +33,15 @@ int Screen::width() {
 	return _width;
 }
 
-void Screen::test_color(){
-	printw("Colours supported: %d\n", COLORS);
+WINDOW* Screen::getStdScr(){
+	return _stdscr;
+}
 
-	for (int i = 1; i < COLORS; ++i){
-		// init_pair(i-1, i, -1);
-		attron(COLOR_PAIR(i));
-		printw("COLOR PAIR: %d\t", COLOR_PAIR(i));
+void Screen::initColor() {
+
+	start_color();
+	
+	for(int i = 1; i < COLORS; i++){
+		init_pair(i, i-1, -1);
 	}
 }

@@ -6,3 +6,6 @@ bin
 .Makefile.swp
 .kdev4/icerunner.kdev4
 build/*
+icerunner.kdev4
+dryrun.log
+targets.log

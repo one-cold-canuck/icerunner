@@ -1,9 +1,10 @@
-
-#include <ncurses.h>
-#include "entity.h"
-
 #ifndef FRAME_H
 #define FRAME_H
+
+#include <ncurses.h>
+#include "entity.hpp"
+
+
 
 // A Frame defines the game map, and a viewport
 class Frame
@@ -28,6 +29,9 @@ public:
 	// Get this frame's parent WINDOW
 	WINDOW *super();
 
+	// Default initializer
+	Frame();
+
 	// Initialize a main window (no parent)
 	Frame(int nr_rows, int nr_cols, int row_0, int col_0);
 
@@ -51,6 +55,9 @@ public:
 	// Return the frame position column
 	int col();
 
+	//draw a frame around a window
+	void frame_window();
+
 	// Fill the window with a test pattern
 	void fill_window();
 
@@ -68,10 +75,15 @@ public:
 
 	// Refresh the window
 	void refresh();
+	
+	void redraw();
 
 	// Move the window to the specified row and column
 	void move(int r, int c);
 
+	void append_message(const char* message);
+
+	void clear_window();
 };
 
 #endif
