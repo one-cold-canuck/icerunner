@@ -1,5 +1,6 @@
 #include "frame.hpp"
 #include "entity.hpp"
+#include "game_map.hpp"
 
 // #include <ncurses.h>
 Frame::Frame(){
@@ -86,10 +87,23 @@ void Frame::add(Entity &x, int row_0, int col_0) {
 	if ((row_0 >= 0 && row_0 < _height) && (col_0 >= 0 && col_0 < _width)) {
 		erase(x);
 
-		wattron(_w, COLOR_PAIR(x.color()));
+		//wattron(_w, COLOR_PAIR(x.color()));
 		mvwaddch(_w, row_0, col_0, x.symbol());
 		x.pos(row_0, col_0);
 	}
+}
+
+void Frame::draw_map(GameMap &game_map) {
+
+	std::vector<std::vector<Tile * >> game_board = &game_map.game_board();
+	
+	for(int r = 0; r < game_map.height(); r++ ) {
+		for (int c = 0; c < game_map.width(); c++){
+			Tile * t = game_board.at(r).at(c);
+			mvwaddch(_w, &t.row(), &t.col(), &t.character());
+		}
+	}
+
 }
 
 // Define the "erase" character, use an empty character for cleaning a cell or

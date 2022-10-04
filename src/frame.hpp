@@ -3,8 +3,8 @@
 
 #include <ncurses.h>
 #include "entity.hpp"
-
-
+#include <vector>
+#include "tile.hpp"
 
 // A Frame defines the game map, and a viewport
 class Frame
@@ -60,6 +60,8 @@ public:
 
 	// Fill the window with a test pattern
 	void fill_window();
+
+	void draw_map(GameMap &game_map);
 
 	// Add a character to the window
 	void add(Entity &x);
