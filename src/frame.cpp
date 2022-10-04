@@ -74,6 +74,7 @@ int Frame::col()
 
 
 // Add a character to the window
+// Change this to symbol - Frame and Screen should not care about entities
 void Frame::add(Entity &x)
 {
 	wattron(win(), COLOR_PAIR(x.color()));
@@ -84,6 +85,8 @@ void Frame::add(Entity &x)
 void Frame::add(Entity &x, int row_0, int col_0) {
 	if ((row_0 >= 0 && row_0 < _height) && (col_0 >= 0 && col_0 < _width)) {
 		erase(x);
+
+		wattron(_w, COLOR_PAIR(x.color()));
 		mvwaddch(_w, row_0, col_0, x.symbol());
 		x.pos(row_0, col_0);
 	}

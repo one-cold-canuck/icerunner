@@ -82,7 +82,7 @@ void game_loop(Frame &game_map, Frame &viewport, Frame &message_block, Frame &st
             break;
         }
         
-        message_block.append_message(("At coordinates " + std::to_string(main_char.row()) + ", " + std::to_string(main_char.col())).c_str());
+        message_block.append_message(("At coordinates " + std::to_string(main_char.row()) + ", " + std::to_string(main_char.col()) +": color set: " + std::to_string(main_char.color())).c_str());
         message_block.redraw();
         message_block.refresh();
         stat_window.redraw();
