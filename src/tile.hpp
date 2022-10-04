@@ -5,7 +5,7 @@
 enum tile_type : short {
     TILE_TYPE_EMPTY  = 1,
     TILE_TYPE_WALL   = 2,    
-    TILE_TYPLE_FLOOR = 4,
+    TILE_TYPE_FLOOR = 4,
     TILE_TYPE_DOOR   = 8,
     TILE_TYPE_HALL   = 16
 };
