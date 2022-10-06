@@ -25,7 +25,7 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// 
-	"forwardPorts": [2222],
+	"forwardPorts": ["2222"],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "gcc -v",
@@ -35,6 +35,6 @@
 	"features": {
 		"git": "latest",
 		"github-cli": "latest",
-		"sshd": "latest",
+		"sshd": "latest"
 	}
 }
