@@ -1,5 +1,4 @@
 #include "tile.hpp"
-#include "game_map.hpp"
 
 // Default constructor - creates a default tile - blocking, no character, non transparent
 Tile::Tile() {
@@ -9,7 +8,7 @@ Tile::Tile() {
     _character = ' ';
 } 
 
-Tile::Tile(int row, int col, tile_type t, bool is_blocking, bool is_trapped, char c, GameMap &game_map) {
+Tile::Tile(int row, int col, tile_type t, bool is_blocking, bool is_trapped, char c) {
 
     _row = row; 
     _col = col;
@@ -17,7 +16,10 @@ Tile::Tile(int row, int col, tile_type t, bool is_blocking, bool is_trapped, cha
     _is_blocking = is_blocking;
     _is_trapped = is_trapped;
     _character = c;
-    _game_map = &game_map;
+}
+
+Tile::~Tile() {
+
 }
 
 int Tile::row() {
@@ -42,12 +44,4 @@ bool Tile::is_trapped() {
 
 bool Tile::is_blocking() {
     return _is_blocking;
-}
-
-void Tile::game_map(GameMap &game_map) { 
-    _game_map = &game_map;
-}
-
-GameMap * Tile::get_parent() {
-    return _game_map; 
 }

@@ -5,6 +5,7 @@
 #include "entity.hpp"
 #include <vector>
 #include "tile.hpp"
+#include "game_map.hpp"
 
 // A Frame defines the game map, and a viewport
 class Frame
@@ -21,6 +22,8 @@ class Frame
 	// Pointer to a curses WINDOW, this will be NULL for a window and will point to the parent
 	// for a subwindow
 	WINDOW *_super;
+
+	GameMap * _game_map;
 
 public:
 	// Get this frame's WINDOW
@@ -61,7 +64,9 @@ public:
 	// Fill the window with a test pattern
 	void fill_window();
 
-	void draw_map(GameMap &game_map);
+	void draw_map(GameMap * game_map);
+
+	GameMap * game_map();
 
 	// Add a character to the window
 	void add(Entity &x);

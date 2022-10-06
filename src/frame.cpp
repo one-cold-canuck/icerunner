@@ -1,6 +1,5 @@
 #include "frame.hpp"
-#include "entity.hpp"
-#include "game_map.hpp"
+
 
 // #include <ncurses.h>
 Frame::Frame(){
@@ -93,14 +92,14 @@ void Frame::add(Entity &x, int row_0, int col_0) {
 	}
 }
 
-void Frame::draw_map(GameMap &game_map) {
+void Frame::draw_map(GameMap * game_map) {
 
-	std::vector<std::vector<Tile * >> game_board = &game_map.game_board();
+	std::vector<std::vector<Tile * >> game_board = game_map->game_board();
 	
-	for(int r = 0; r < game_map.height(); r++ ) {
-		for (int c = 0; c < game_map.width(); c++){
+	for(int r = 0; r < game_map->height() - 1; r++ ) {
+		for (int c = 0; c < game_map->width() - 1; c++){
 			Tile * t = game_board.at(r).at(c);
-			mvwaddch(_w, &t.row(), &t.col(), &t.character());
+			mvwaddch(_w, t->row(), t->col(), t->character());
 		}
 	}
 

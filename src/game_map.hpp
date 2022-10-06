@@ -4,6 +4,7 @@
 #include "tile.hpp"
 #include <vector>
 
+
 class GameMap {
     
     int _height; // map height
@@ -11,7 +12,7 @@ class GameMap {
     int _level;  // unimplemented, for future use
 
     std::vector<Tile> _tile_list;
-    std::vector< std::vector<Tile *> > _game_board;
+    std::vector<std::vector< Tile *>> _game_board;
 
 public:
     GameMap();
@@ -33,10 +34,11 @@ public:
     void setHeight(int h);
     void setWidth(int w);
     void setLevel(int l);
-    std::vector< Tile> init_tiles();
+    std::vector<Tile> init_tiles();
     int height();
     int width();
     int level();
-    std::vector< std::vector < Tile *>> game_board();
+    std::vector< std::vector < Tile*>> game_board();  
+
 };
 #endif

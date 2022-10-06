@@ -101,7 +101,7 @@ int main()
 		bool has_parent;
 	};
 
-    WINDOW_CONFIGURATION game_map;
+    WINDOW_CONFIGURATION map_window;
 	WINDOW_CONFIGURATION viewport;
 	WINDOW_CONFIGURATION message_block;
 	WINDOW_CONFIGURATION stat_window;
@@ -110,10 +110,10 @@ int main()
 
     Screen screen;
 
-    game_map.nr_rows = 2*screen.height();
-	game_map.nr_cols = 2*screen.width();
-	game_map.row_0 = 0;
-	game_map.col_0 = 0;
+    map_window.nr_rows = 2*screen.height();
+	map_window.nr_cols = 2*screen.width();
+	map_window.row_0 = 0;
+	map_window.col_0 = 0;
 
 	viewport.nr_rows = screen.height();
 	viewport.nr_cols = screen.width();
@@ -135,20 +135,25 @@ int main()
     // Wait until a key is pressed
     int ch = getch();
     
-    Frame gmap(game_map.nr_rows, game_map.nr_cols, game_map.row_0, game_map.col_0);
-    Frame vport(gmap, viewport.nr_rows-message_block.nr_rows, viewport.nr_cols-stat_window.nr_cols, viewport.row_0, viewport.col_0);
+    GameMap game_map(map_window.nr_rows, map_window.nr_cols, 1);
+    
+    Frame mapw(map_window.nr_rows, map_window.nr_cols, map_window.row_0, map_window.col_0);
+    Frame vport(mapw, viewport.nr_rows-message_block.nr_rows, viewport.nr_cols-stat_window.nr_cols, viewport.row_0, viewport.col_0);
     Frame mblock(message_block.nr_rows, message_block.nr_cols, message_block.row_0, message_block.col_0);
     Frame statw(stat_window.nr_rows, stat_window.nr_cols, stat_window.row_0, stat_window.col_0);
 
-    gmap.fill_window();
-    Entity main_char('@', gmap.height()/2, gmap.width()/2);
+    game_map.init_tiles();
+    game_map.init_map();
+
+    mapw.draw_map(&game_map);
+    Entity main_char('@', mapw.height()/2, mapw.width()/2);
 
     
     mblock.clear_window();
     statw.clear_window();
 
     // Game loop
-    game_loop(gmap, vport, mblock, statw, main_char, ch);
+    game_loop(mapw, vport, mblock, statw, main_char, ch);
 
     screen.~Screen();
 

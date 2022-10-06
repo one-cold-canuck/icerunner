@@ -12,39 +12,31 @@
 
     }
 
-    GameMap::GameMap(){
-        // Iterate vector, destroy tiles?
+    GameMap::~GameMap(){
+
     }
 
-    // Flood the map with tiles - each tile has:
-    //    passable: false
-    //    transparent: false
-    //    <items>: 
-    //    x,y - position in vector.
-    //
-    //    Store pointer to tile in Vector
-
-
     std::vector<Tile> GameMap::init_tiles(){
-        for(int j = 0; j < _height; j++) {
-            for(int k = 0; k < _width; k++) {
-                Tile tile(j, k, tile_type::TILE_TYPE_EMPTY, true, false, '.', this);    
+        for(int j = 0; j < _height-1; j++) {
+            for(int k = 0; k < _width-1; k++) {
+                Tile tile(j, k, tile_type::TILE_TYPE_EMPTY, true, false, '.');    
                 _tile_list.push_back(tile);
             }
         }
+        return _tile_list;
     }
 
     void GameMap::init_map(){  // Flood the map with Tile pointers, 
         int i = 0;
-        for (int r = 0; r < _height; r++) {
-            std::vector<Tile *> tile_tmp;
-            for (int c = 0; c < _width; c++) {
-                std::vector<Tile *> tile_col;
+        for (int r = 0; r < _height - 1; r++) {
+            std::vector<Tile *> tile_col;
+            for (int c = 0; c < _width -1; c++) {
                 tile_col.push_back(&_tile_list.at(i));
-                tile_tmp = tile_col;
+                i++;
             }
-            _game_board.push_back(tile_tmp);
+            _game_board.push_back(tile_col);
         }
+
     }
 
     void GameMap::create_room(int x, int y) {  //Basic, to be replaced with a room mechanic, for special rooms etc
