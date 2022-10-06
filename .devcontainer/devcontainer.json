@@ -33,7 +33,11 @@
 	"features": {
 		"git": "latest",
 		"github-cli": "latest",
+<<<<<<< HEAD
 		"sshd": "latest",
 		"fish": "latest"
+=======
+		"sshd": "latest"
+>>>>>>> refs/remotes/origin/master
 	}
 }
