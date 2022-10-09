@@ -19,7 +19,7 @@
     std::vector<Tile> GameMap::init_tiles(){
         for(int j = 0; j < _height-1; j++) {
             for(int k = 0; k < _width-1; k++) {
-                Tile tile(j, k, tile_type::TILE_TYPE_EMPTY, true, false, '.');    
+                Tile tile(j, k, tile_type::TILE_TYPE_EMPTY, true, false, ' ');    
                 _tile_list.push_back(tile);
             }
         }

@@ -36,6 +36,8 @@ public:
 	int color();
 
 	void setColor(int c);
+
+	void previous_position(int col, int row);
 };
 
 #endif
