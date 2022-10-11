@@ -2,15 +2,15 @@
 
 // Default constructor - creates a default tile - blocking, no character, non transparent
 Tile::Tile() {
-    _tile_type = TILE_TYPE_EMPTY;
+    _tile_type = TileType::empty;
     _is_blocking = true;
     _is_trapped = false;
     _character = ' ';
-} 
+}
 
-Tile::Tile(int row, int col, tile_type t, bool is_blocking, bool is_trapped, char c) {
+Tile::Tile(int row, int col, TileType t, bool is_blocking, bool is_trapped, char c) {
 
-    _row = row; 
+    _row = row;
     _col = col;
     _tile_type = t;
     _is_blocking = is_blocking;
@@ -30,7 +30,7 @@ int Tile::col(){
     return _col;
 }
 
-tile_type Tile::type() {
+TileType Tile::type() {
     return _tile_type;
 }
 
@@ -44,4 +44,24 @@ bool Tile::is_trapped() {
 
 bool Tile::is_blocking() {
     return _is_blocking;
+}
+
+void Tile::setTileType(TileType t)
+{
+    _tile_type = t;
+}
+
+void Tile::setTrapped(bool t)
+{
+    _is_trapped = t;
+}
+
+void Tile::setBlocking(bool b)
+{
+    _is_blocking = b;
+}
+
+void Tile::setCharacter(char c)
+{
+    _character = c;
 }

@@ -9,3 +9,4 @@ build/*
 icerunner.kdev4
 dryrun.log
 targets.log
+CMakeLists.txt.user

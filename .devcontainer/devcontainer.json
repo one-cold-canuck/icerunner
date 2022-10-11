@@ -35,6 +35,5 @@
 		"github-cli": "latest",
 		"sshd": "latest",
 		"fish": "latest",
-		"sshd": "latest"
 	}
 }
