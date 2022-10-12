@@ -28,28 +28,35 @@ Frame::~Frame(){
     delwin(_window);
 }
 
-void Frame::add(Entity * e) {
-    mvwaddch(_window, e->row(), e->col(), e->symbol());
+void Frame::erase(int row, int col) {
+    mvwaddch(_window, row, col, ' ');
 }
 
-void Frame::erase(Entity * e) {
-    mvwaddch(_window, e->row(), e->col(), ' ');
-}
-
-void Frame::add(Entity * e, int row_0, int col_0) {
-    if((row_0 >= 0 && row_0 < _height) && (col_0 >= 0 && col_0 < _width)) {
-            erase(e);
-            mvwaddch(_window, row_0, col_0, e->symbol());
-            e->pos(row_0, col_0);
+bool Frame::add(char c, int dest_row, int dest_col) {
+    bool is_successful = false;
+    if((dest_row >= 0 && dest_row < _height) && (dest_col >= 0 && dest_col < _width)) {
+            mvwaddch(_window, dest_row, dest_col, c);
+            is_successful = true;
         }
+    return is_successful;
+}
+
+bool Frame::add(char c, int row, int col, int dest_row, int dest_col) {
+    bool is_successful = false;
+    if((dest_row >= 0 && dest_row < _height) && (dest_col >= 0 && dest_col < _width)) {
+            erase(row, col);
+            mvwaddch(_window, dest_row, dest_col, c);
+            is_successful = true;
+        }
+    return is_successful;
 }
 
 
-void Frame::center(Entity * e){
+void Frame::center(int row, int col){
     if (_has_super){
         int rr = _y_pos, cc = _x_pos, hh, ww;
-        int _r = e->row() - _height/2;
-        int _c = e->col() - _width/2;
+        int _r = row - _height/2;
+        int _c = col - _width/2;
 
         getmaxyx(_super, hh, ww);
 

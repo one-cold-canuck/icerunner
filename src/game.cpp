@@ -29,8 +29,8 @@ void Game::init(const char *title) {
 
   if(ch == 'q' || ch == 'Q') return;
 
-  map->add(main_char);
-  viewport->center(main_char);
+  map->add(main_char->symbol(), main_char->row(), main_char->col());
+  viewport->center(main_char->row(), main_char->col());
   viewport->refresh();
 
   isRunning = true;
@@ -42,29 +42,38 @@ void Game::handleEvents() {
   int ch = getch();
 
   if (ch == KEY_LEFT) {
-    map->add(main_char, main_char->row(), main_char->col() - 1);
-//    viewport->center(main_char);
-//    viewport->refresh();
+    int dest_row = main_char->row();
+    int dest_col = main_char->col() - 1;
+    if (map->add(main_char->symbol(), main_char->row(), main_char->col(), dest_row, dest_col)) {
+      main_char->pos(dest_row, dest_col);
+    }
   }
 
   else if (ch == KEY_RIGHT) {
-    map->add(main_char, main_char->row(), main_char->col() + 1);
-//    viewport->center(main_char);
-//    viewport->refresh();
+    int dest_row = main_char->row();
+    int dest_col = main_char->col() + 1;
+    if (map->add(main_char->symbol(), main_char->row(), main_char->col(), dest_row, dest_col)) {
+      main_char->pos(dest_row, dest_col);
+    }
   }
 
   else if (ch == KEY_UP) {
-    map->add(main_char, main_char->row() - 1, main_char->col());
-//    viewport->center(main_char);
-//    viewport->refresh();
+    int dest_row = main_char->row() - 1;
+    int dest_col = main_char->col();
+    map->add(main_char->symbol(), main_char->row(), main_char->col(), dest_row, dest_col);
+    if (map->add(main_char->symbol(), main_char->row(), main_char->col(), dest_row, dest_col)) {
+      main_char->pos(dest_row, dest_col);
+    }
   }
 
   else if (ch == KEY_DOWN) {
-    map->add(main_char, main_char->row() + 1, main_char->col());
-//    viewport->center(main_char);
-//    viewport->refresh();
-
+    int dest_row = main_char->row() + 1;
+    int dest_col = main_char->col();
+    if (map->add(main_char->symbol(), main_char->row(), main_char->col(), dest_row, dest_col)) {
+      main_char->pos(dest_row, dest_col);
+    }
   }
+
   else if (ch == 'q' || ch == 'Q') {
     isRunning = false;
 
@@ -78,7 +87,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    viewport->center(main_char);
+    viewport->center(main_char->row(), main_char->col());
     viewport->refresh();
 }
 
