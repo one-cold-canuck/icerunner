@@ -1,16 +1,18 @@
 #ifndef TILE_H
 #define TILE_H
-enum class TileType{
-    empty,
-    wall,
-    floor,
-    door,
-    hall
-};
 
 class Tile {
 
 public:
+
+    enum class TileType{
+        empty,
+        wall,
+        floor,
+        door,
+        hall
+    };
+
     Tile();
     ~Tile();
     Tile(int row, int col, TileType t, bool _is_blocking, bool _is_trapped, char c);

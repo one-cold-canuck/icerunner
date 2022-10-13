@@ -28,8 +28,8 @@ Frame::~Frame(){
     delwin(_window);
 }
 
-void Frame::erase(int row, int col) {
-    mvwaddch(_window, row, col, ' ');
+void Frame::erase(int row, int col, char tc) {
+    mvwaddch(_window, row, col, tc);
 }
 
 bool Frame::add(char c, int dest_row, int dest_col) {
@@ -41,10 +41,10 @@ bool Frame::add(char c, int dest_row, int dest_col) {
     return is_successful;
 }
 
-bool Frame::add(char c, int row, int col, int dest_row, int dest_col) {
+bool Frame::add(char c, char tc, int row, int col, int dest_row, int dest_col) {
     bool is_successful = false;
     if((dest_row >= 0 && dest_row < _height) && (dest_col >= 0 && dest_col < _width)) {
-            erase(row, col);
+            erase(row, col, tc);
             mvwaddch(_window, dest_row, dest_col, c);
             is_successful = true;
         }
@@ -88,6 +88,15 @@ void Frame::center(int row, int col){
     }
 }
 
+void Frame::draw(std::vector< std::vector< char >> c) {
+    for (int i = 0; i < c.size(); i++) {
+        std::vector<char> v = c.at(i);
+        for (int j = 0; j < v.size(); j++) {
+            mvwaddch(_window, c.at(i).at(j), i, j);
+        }
+        //refresh();
+    }
+}
 void Frame::refresh()
 {
     if(_has_super) {

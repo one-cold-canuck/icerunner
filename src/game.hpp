@@ -10,6 +10,7 @@
 #include "frame.hpp"
 #include "entity.hpp"
 #include "screen.hpp"
+#include "tile.hpp"
 
 /**
  * @todo write docs

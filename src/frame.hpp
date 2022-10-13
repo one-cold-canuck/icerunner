@@ -3,6 +3,7 @@
 
 //#include <curses.h>
 #include <ncurses.h>
+#include <vector>
 //#include "entity.hpp"
 
 enum class FrameType { stdscr, mapGrid, viewport, messageBox, popupBox, sideBar };
@@ -20,16 +21,15 @@ public:
   int width();
   int xPos();
   int yPos();
-  //void add(Entity * e);
-  //void add(char c);
-  //void erase(Entity * e);
-  //void add(Entity * e, int row_0, int col_0);
-  //void center(Entity * e);
-  bool add(char c, int row, int col, int dest_row, int dest_col);
+
+  bool add(char c, char tc, int row, int col, int dest_row, int dest_col);
   bool add(char c, int dest_row, int dest_col);
   void move(int r, int c);
-  void erase(int row, int col);
+  void erase(int row, int col, char tc);
   void center (int row, int col);
+
+  void draw(std::vector< std::vector< char >> c);
+
   void refresh();
   void fill_window();
 

@@ -30,7 +30,7 @@ int Tile::col(){
     return _col;
 }
 
-TileType Tile::type() {
+Tile::TileType Tile::type() {
     return _tile_type;
 }
 

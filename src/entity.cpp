@@ -1,5 +1,7 @@
 #include "entity.hpp"
 
+Entity::Entity(){}
+
 Entity::Entity(char symbol, int row_0, int col_0) {
     _row = row_0;
     _col = col_0;
